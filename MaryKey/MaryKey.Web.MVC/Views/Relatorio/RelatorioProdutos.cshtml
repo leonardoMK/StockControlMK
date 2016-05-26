@@ -1,0 +1,45 @@
+﻿@model IList<MaryKey.Web.MVC.Models.ProdutoModel>
+@{
+    ViewBag.Title = "RelatorioProdutos";
+}
+@if(TempData["Mensagem"]!=null)
+{ 
+    <div class="alert-success alert-meuEfeito" style="width:40%;height:20%;">
+        <h3 class="text-success text-center" style="vertical-align:middle;">@TempData["Mensagem"]</h3>
+    </div>
+}
+<h2>Relatório de Produtos em Estoque</h2>
+<a class="btn botao pull-right" style="margin-bottom:10px;" href="~/Produto/ManterProduto">Adicionar Produto</a>
+<table class="table table-bordered White">
+<thead>
+        <tr style="background-color:#beb9b9;" class="linha white">
+            <th style="width: 15%">Produto</th>
+            <th style="width: 8%">Valor de compra</th>
+            <th style="width: 7%">Valor de venda</th> 
+            <th style="width: 7%">Valor Total</th> 
+            <th style="width: 7%">Lucro total</th>
+            <th style="width: 4%">Edição</th>
+            <th style="width: 4%">Excluir</th>
+        </tr>
+    </thead>
+    @{ decimal LucroTotal = 0;}
+    @foreach (var p in Model)
+    {
+        <tr class="linha hoverEfectTable" style="color:#52414c;font-family:'Comic Sans MS';font-weight:bold;">
+            <td>@p.Nome</td>
+            <td>R$ @p.GetValorCompra()</td>
+            <td>R$ @p.ValorProduto</td>
+            <td>R$ @p.ValorTotal</td>
+            <td>R$ @p.Lucro</td>
+            <td class="text-center"><a class="btn botao" href="~/Produto/ManterProduto/@p.Id">Editar</a></td>
+            <td class="text-center"><a class="btn botao" href="~/Produto/ExcluirProduto/@p.Id">Excluir</a></td>
+        </tr>
+        { LucroTotal += @p.Lucro; }
+    }
+</table>
+
+<h3>O Lucro total dos produtos em estoque é de: R$ @LucroTotal</h3>
+
+
+
+

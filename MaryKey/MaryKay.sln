@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - UI", "1 - UI", "{C29527E4-5C62-4201-A1FD-5AA36250C707}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Dominio", "2 - Dominio", "{63C3C057-79A5-4A10-AAF8-723B5BB26A1B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - InfraEstrutura", "3 - InfraEstrutura", "{0F186C23-7FC5-4F7E-BD7C-FEEDBE2A8126}"
+	ProjectSection(SolutionItems) = preProject
+		MaryKey.Web.MVC\Web.config = MaryKey.Web.MVC\Web.config
+		MaryKey.Web.MVC\Web.Debug.config = MaryKey.Web.MVC\Web.Debug.config
+		MaryKey.Web.MVC\Web.Release.config = MaryKey.Web.MVC\Web.Release.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaryKay.Dominio", "MaryKey.Dominio\MaryKay.Dominio.csproj", "{1EB2F295-C7BD-4AD3-AC3A-B8E2D276BB78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repositorios", "Repositorios", "{3B3B9168-390F-4EF5-A442-FF3A6D060FC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaryKay.Repositorio.EF", "MaryKey.Repositorio.EF\MaryKay.Repositorio.EF.csproj", "{2F7611A4-5366-4CF9-A753-62B926601B19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaryKay.Web.MVC", "MaryKey.Web.MVC\MaryKay.Web.MVC.csproj", "{F0F763E9-7EE2-4832-B66A-7FE0D3159787}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1EB2F295-C7BD-4AD3-AC3A-B8E2D276BB78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EB2F295-C7BD-4AD3-AC3A-B8E2D276BB78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EB2F295-C7BD-4AD3-AC3A-B8E2D276BB78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EB2F295-C7BD-4AD3-AC3A-B8E2D276BB78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F7611A4-5366-4CF9-A753-62B926601B19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F7611A4-5366-4CF9-A753-62B926601B19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F7611A4-5366-4CF9-A753-62B926601B19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F7611A4-5366-4CF9-A753-62B926601B19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0F763E9-7EE2-4832-B66A-7FE0D3159787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0F763E9-7EE2-4832-B66A-7FE0D3159787}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0F763E9-7EE2-4832-B66A-7FE0D3159787}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0F763E9-7EE2-4832-B66A-7FE0D3159787}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1EB2F295-C7BD-4AD3-AC3A-B8E2D276BB78} = {63C3C057-79A5-4A10-AAF8-723B5BB26A1B}
+		{3B3B9168-390F-4EF5-A442-FF3A6D060FC6} = {0F186C23-7FC5-4F7E-BD7C-FEEDBE2A8126}
+		{2F7611A4-5366-4CF9-A753-62B926601B19} = {3B3B9168-390F-4EF5-A442-FF3A6D060FC6}
+		{F0F763E9-7EE2-4832-B66A-7FE0D3159787} = {C29527E4-5C62-4201-A1FD-5AA36250C707}
+	EndGlobalSection
+EndGlobal

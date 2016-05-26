@@ -1,0 +1,45 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.botao{
+    background-color:#f6aed3;
+    color:black;
+}
+
+.alert-meuEfeito{
+    border-radius:4px;
+    border-width:1px;
+    border-color:black;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.texto-index{
+    color:crimson;
+    text-align: center;
+}
+.logoMaryKey{
+    width:50%;
+    height:40%;
+    vertical-align:middle;
+}
+
+.hoverEfectTable{
+    
+}
+.hoverEfectTable:hover{
+    background-color:#e8e4e4;
+}

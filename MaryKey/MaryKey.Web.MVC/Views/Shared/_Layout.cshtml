@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Products Mary Kay</title>
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Mary Key - Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="~/Relatorio/RelatorioProdutos" class="btn">Lista de Produtos</a>
+                    </li>
+                    <li>
+                        <form class="form-group" style="margin-top:10px;" action='@Url.Action("RelatorioProdutos","Relatorio")'>
+                            <input placeholder="Pesquisar um produto" type="text" name="nome" id="nome" />
+                            <input type="submit" style="width:100px; height:30px;" value="Pesquisar" class="btn btn-sm" id="Pesquisar" />
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer style="position:fixed;bottom:0;">
+            <p>&copy; @DateTime.Now.Year - Alguns direitos reservados</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("Scripts", false)
+        <script>
+        $("document").ready(function () {
+            $("#nome").autocomplete({
+                source: '@Url.Action("ProdutosAutoComplete", "Relatorio")',
+                select: function () { $("#Pesquisar").click(); }
+            });
+        });
+        </script>
+</body>
+</html>

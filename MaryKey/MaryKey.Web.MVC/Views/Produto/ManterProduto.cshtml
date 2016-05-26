@@ -1,0 +1,66 @@
+﻿@model MaryKey.Web.MVC.Models.ProdutoModel
+@{
+    ViewBag.Title = "ManterProduto";
+}
+<div class="text-center">
+    <h2 class="White alert-success text-success alert-meuEfeito text-center" style="width:40%;height:20%;">@TempData["Mensagem"]
+    </h2>
+</div>
+
+@if (Model == null || Model.Id == null)
+{
+    <h2 class="">Cadastro de Jogo</h2>
+}
+else
+{
+    <h2 class="">Edição de Jogo</h2>
+}
+@using (Html.BeginForm("Salvar", "Produto", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, null, new { @class = "White" });
+
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nome, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Nome, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ValorProduto, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(m => m.ValorProduto, new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.ValorProduto, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Quantidade, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.Quantidade, new { @class = "form-control", @type = "number" })
+                @Html.ValidationMessageFor(m => m.Quantidade, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.PercentualDesconto, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.PercentualDesconto, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PercentualDesconto, null, new { @class = "text-danger" })
+            </div>
+        </div>
+    //DropDownListFors to Enum
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+    </div>
+}
+@section Scripts {
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+}
