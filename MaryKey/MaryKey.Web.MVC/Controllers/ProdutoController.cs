@@ -82,7 +82,8 @@ namespace MaryKey.Web.MVC.Controllers
                         TempData["Mensagem"] = "Erro ao atualizar dados no banco de dados: '"+e.Message+"' Por favor, digite os dados corretamente";
                     }
                     TempData["Mensagem"] = "Produto atualizado com sucesso!";
-                    return View("ManterProduto", model);
+                    return RedirectToAction("RelatorioProdutos","Relatorio");
+                    //View("ManterProduto", model);
                 }
                 else
                 {
@@ -96,6 +97,7 @@ namespace MaryKey.Web.MVC.Controllers
                             ValorProduto = model.ValorProduto
                         });
                         TempData["Mensagem"] = "Produto inserido com sucesso";
+                        return RedirectToAction("RelatorioProdutos", "Relatorio");
                     }
                     catch(SqlException e)
                     {

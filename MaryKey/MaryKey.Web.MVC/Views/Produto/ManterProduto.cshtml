@@ -9,11 +9,11 @@
 
 @if (Model == null || Model.Id == null)
 {
-    <h2 class="">Cadastro de Jogo</h2>
+    <h2 class="">Cadastro de Produto</h2>
 }
 else
 {
-    <h2 class="">Edição de Jogo</h2>
+    <h2 class="">Edição de Produto</h2>
 }
 @using (Html.BeginForm("Salvar", "Produto", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {

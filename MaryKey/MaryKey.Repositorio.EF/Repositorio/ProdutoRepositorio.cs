@@ -38,7 +38,7 @@ namespace MaryKey.Repositorio.EF.Repositorio
         {
             using(CriarBaseDeDados())
             {
-                return bd.Produto.Where(p => p.Id == p.Id).First();
+                return bd.Produto.Find(Id);
             }
         }
         public IList<Produto> BuscarTodos()
