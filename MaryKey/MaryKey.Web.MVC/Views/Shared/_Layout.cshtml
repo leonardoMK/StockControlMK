@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Products Mary Kay</title>
         <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
         <link href="~/Content/Site.css" rel="stylesheet" />
+        <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -25,8 +26,9 @@
                     </li>
                     <li>
                         <form class="form-group" style="margin-top:10px;" action='@Url.Action("RelatorioProdutos","Relatorio")'>
-                            <input placeholder="Pesquisar um produto" type="text" name="nome" id="nome" />
-                            <input type="submit" style="width:100px; height:30px;" value="Pesquisar" class="btn btn-sm" id="Pesquisar" />
+                            <input placeholder="Pesquisar um produto" type="text" name="nome" id="nome">
+                            <input type="submit" value="" class="g-search-button" id="Pesquisar" />
+                            </input>
                         </form>
                     </li>
                 </ul>
@@ -44,6 +46,7 @@
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
     @RenderSection("Scripts", false)
         <script>
         $("document").ready(function () {

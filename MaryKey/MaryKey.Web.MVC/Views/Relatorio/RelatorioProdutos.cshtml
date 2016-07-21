@@ -14,6 +14,7 @@
 <thead>
         <tr style="background-color:#beb9b9;" class="linha white">
             <th style="width: 15%">Produto</th>
+            <th style="width: 4%">Quantidade</th>
             <th style="width: 8%">Valor de compra</th>
             <th style="width: 7%">Valor de venda</th> 
             <th style="width: 7%">Valor Total</th> 
@@ -22,11 +23,15 @@
             <th style="width: 4%">Excluir</th>
         </tr>
     </thead>
-    @{ decimal LucroTotal = 0;}
+    @{  decimal LucroTotal = 0;
+        decimal TotalPago = 0;
+        decimal TotalVenda = 0;
+        }
     @foreach (var p in Model)
     {
         <tr class="linha hoverEfectTable" style="color:#52414c;font-family:'Comic Sans MS';font-weight:bold;">
             <td>@p.Nome</td>
+            <td>@p.Quantidade</td>
             <td>R$ @p.GetValorCompra()</td>
             <td>R$ @p.ValorProduto</td>
             <td>R$ @p.ValorTotal</td>
@@ -34,12 +39,16 @@
             <td class="text-center"><a class="btn botao" href="~/Produto/ManterProduto/@p.Id">Editar</a></td>
             <td class="text-center"><a class="btn botao" href="~/Produto/ExcluirProduto/@p.Id">Excluir</a></td>
         </tr>
-        { LucroTotal += @p.Lucro; }
+        {   LucroTotal += @p.Lucro;
+            TotalPago += @p.GetValorCompra();
+            TotalVenda += @p.ValorProduto;
+        }
     }
 </table>
 
-<h3>O Lucro total dos produtos em estoque é de: R$ @LucroTotal</h3>
-
+    <h3>O valor total pago pelos produtos listados é de: R$ @TotalPago</h3>
+    <h3>O valor total de venda dos produtos é de: R$ @TotalVenda</h3>
+    <h3>O Lucro total dos produtos em estoque é de: R$ @LucroTotal</h3>
 
 
 

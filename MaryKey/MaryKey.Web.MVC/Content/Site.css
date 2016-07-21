@@ -37,6 +37,24 @@ textarea {
     vertical-align:middle;
 }
 
+.g-search-button {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    left: -22px;
+    top: 3px;
+    background-image: url('Images/Button_15-128.png');
+    background-size:15px 15px;
+    float:right;
+}
+
+#Pesquisar{
+    border-radius:100px;
+    width:18px;
+    height: 18px;
+}
+
 .hoverEfectTable{
     
 }
