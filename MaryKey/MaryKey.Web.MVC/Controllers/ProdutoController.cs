@@ -1,6 +1,7 @@
 ﻿using MaryKey.Dominio;
 using MaryKey.Repositorio.EF.Repositorio;
 using MaryKey.Web.MVC.Models;
+using MaryKey.Web.MVC.Seguranca;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -10,6 +11,7 @@ using System.Web.Mvc;
 
 namespace MaryKey.Web.MVC.Controllers
 {
+    [Autorizador]
     public class ProdutoController : Controller
     {
         // GET: Produto

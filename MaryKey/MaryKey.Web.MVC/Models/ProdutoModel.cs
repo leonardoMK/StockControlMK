@@ -23,7 +23,7 @@ namespace MaryKey.Web.MVC.Models
         [RegularExpression("([0-9]+)")]
         public int PercentualDesconto { get; set; }
 
-        public decimal Lucro { get; set; }
+        public decimal Lucro{ get; set; }
 
         public decimal ValorTotal { get; set; }
 

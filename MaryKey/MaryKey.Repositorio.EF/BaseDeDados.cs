@@ -17,11 +17,15 @@ namespace MaryKey.Repositorio.EF
             var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
         public DbSet<Produto> Produto { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Permissao> Permissao { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             Database.SetInitializer<BaseDeDados>(null);
             modelBuilder.Configurations.Add(new ProdutoMap());
+            modelBuilder.Configurations.Add(new UsuarioMap());
+            modelBuilder.Configurations.Add(new PermissaoMap());
             base.OnModelCreating(modelBuilder);
         }
 

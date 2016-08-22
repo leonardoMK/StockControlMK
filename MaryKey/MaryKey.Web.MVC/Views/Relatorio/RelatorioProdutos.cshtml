@@ -40,8 +40,8 @@
             <td class="text-center"><a class="btn botao" href="~/Produto/ExcluirProduto/@p.Id">Excluir</a></td>
         </tr>
         {   LucroTotal += @p.Lucro;
-            TotalPago += @p.GetValorCompra();
-            TotalVenda += @p.ValorProduto;
+            TotalPago += @p.GetValorCompra() * p.Quantidade;
+            TotalVenda += @p.ValorProduto * p.Quantidade;
         }
     }
 </table>
