@@ -9,6 +9,19 @@
     padding-right: 15px;
 }
 
+.login{
+    border: 2px groove #ccc;
+    border-radius: 5px;
+    width: 400px;
+    background-color: #f1f1f1;
+    height: 250px;
+    padding-left: 10%;
+    padding-top: 1%;
+    text-shadow: azure;
+    text-shadow: 2px 1px #ccc;
+
+}
+
 .botao{
     background-color:#f6aed3;
     color:black;
@@ -69,18 +82,6 @@ textarea {
     border-radius:100px;
     width:18px;
     height: 18px;
-}
-.login{
-    border: 2px groove #ccc;
-    border-radius: 5px;
-    width: 400px;
-    background-color: #f1f1f1;
-    height: 250px;
-    padding-left: 10%;
-    padding-top: 1%;
-    text-shadow: azure;
-    text-shadow: 2px 1px #ccc;
-
 }
 
 .hoverEfectTable{
