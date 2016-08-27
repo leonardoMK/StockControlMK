@@ -4,10 +4,10 @@
 }
 
 
-<h2 class="Black col-lg-offset-5">Login</h2>
+<h2 class="Black text-center" style="padding-top:10px;">Login</h2>
 <div class="col-lg-offset-4">
     <h4 class="text-danger">@Html.ValidationMessage("INVALID_LOGIN")</h4>
-    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "form white" }))
+    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "form white login" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true);

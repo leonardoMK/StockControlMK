@@ -14,6 +14,22 @@
     color:black;
 }
 
+.botao-Logout{
+    background-color:#272727;
+    text-decoration: none;
+    color:#808080;
+
+}
+
+.botao-Logout:hover{
+    text-decoration:none;
+    color:#ccc;
+}
+
+.botao-Logout:active{
+    text-decoration:none;
+}
+
 .alert-meuEfeito{
     border-radius:4px;
     border-width:1px;
@@ -53,6 +69,18 @@ textarea {
     border-radius:100px;
     width:18px;
     height: 18px;
+}
+.login{
+    border: 2px groove #ccc;
+    border-radius: 5px;
+    width: 400px;
+    background-color: #f1f1f1;
+    height: 250px;
+    padding-left: 10%;
+    padding-top: 1%;
+    text-shadow: azure;
+    text-shadow: 2px 1px #ccc;
+
 }
 
 .hoverEfectTable{
