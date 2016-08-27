@@ -34,6 +34,16 @@ namespace MaryKey.Repositorio.EF.Repositorio
             }
         }
 
+        public int RemoverUmItem(Produto p)
+        {
+           
+            using (CriarBaseDeDados())
+            {
+                bd.Entry(p).State = EntityState.Modified;
+                return bd.SaveChanges();
+            }
+        }
+
         public Produto buscarPorId(int Id)
         {
             using(CriarBaseDeDados())

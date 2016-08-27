@@ -40,6 +40,26 @@ namespace MaryKey.Web.MVC.Controllers
             return View();
         }
 
+        public ActionResult RemoverUmItem(int id)
+        {
+            var db = new ProdutoRepositorio();
+            var produto = db.buscarPorId(id);
+            if(produto.Quantidade <= 1)
+            {
+                TempData["Mensagem"] = "Produto excluido com sucesso!";
+                db.Excluir(id);
+            }
+            else
+            {
+                produto.Quantidade--;
+                db.RemoverUmItem(produto);
+                TempData["Mensagem"] = "Removido um item do produto";
+            }
+            
+            
+            return RedirectToAction("RelatorioProdutos", "Relatorio");
+        }
+
         public ActionResult ExcluirProduto(int id)
         {
             var db = new ProdutoRepositorio();
