@@ -14,13 +14,13 @@
 <thead>
         <tr style="background-color:#beb9b9;" class="linha white">
             <th style="width: 15%">Produto</th>
-            <th style="width: 3%">Quantidade</th>
+            <th style="width: 8%" class="text-center">Quantidade</th>
             <th style="width: 6%">Valor de compra</th>
             <th style="width: 6%">Valor de venda</th> 
             <th style="width: 5%">Valor Total</th> 
             <th style="width: 5%">Lucro total</th>
             <th style="width: 4%" class="text-center">Edição</th>
-            <th style="width: 15%" class="text-center">Excluir</th>
+            <th style="width: 6%" class="text-center">Excluir</th>
         </tr>
     </thead>
     @{  decimal LucroTotal = 0;
@@ -31,13 +31,13 @@
     {
         <tr class="linha hoverEfectTable" style="color:#52414c;font-family:'Comic Sans MS';font-weight:bold;">
             <td>@p.Nome</td>
-            <td>@p.Quantidade</td>
+            <td><a class="btn botao pull-left list-inline" href="~/Produto/AdicionarUmItem/@p.Id">+1</a><span class="btn btn-default text-center" style="margin-left:13%;">@p.Quantidade</span><a class="btn botao pull-right list-inline" href="~/Produto/RemoverUmItem/@p.Id">-1</a></td>
             <td>R$ @p.GetValorCompra()</td>
             <td>R$ @p.ValorProduto</td>
             <td>R$ @p.ValorTotal</td>
             <td>R$ @p.Lucro</td>
             <td class="text-center"><a class="btn botao" href="~/Produto/ManterProduto/@p.Id">Editar</a></td>
-            <td class="text-center"><a class="btn botao pull-left list-inline" href="~/Produto/ExcluirProduto/@p.Id">Excluir</a> <span style="font-size:20px;"> | </span> <a class="btn botao pull-right list-inline" href="~/Produto/RemoverUmItem/@p.Id">-1 Quantidade</a></td>
+            <td class="text-center"><a class="btn botao" href="~/Produto/ExcluirProduto/@p.Id">Excluir</a></td>
         </tr>
         {   LucroTotal += @p.Lucro;
             TotalPago += @p.GetValorCompra() * p.Quantidade;

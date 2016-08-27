@@ -60,6 +60,17 @@ namespace MaryKey.Web.MVC.Controllers
             return RedirectToAction("RelatorioProdutos", "Relatorio");
         }
 
+        public ActionResult AdicionarUmItem(int id)
+        {
+            var db = new ProdutoRepositorio();
+            var produto = db.buscarPorId(id);
+            produto.Quantidade++;
+            db.Atualizar(produto);
+
+            TempData["Mensagem"] = "Adicionado um item ao produto";
+            return RedirectToAction("RelatorioProdutos", "Relatorio");
+        }
+
         public ActionResult ExcluirProduto(int id)
         {
             var db = new ProdutoRepositorio();
