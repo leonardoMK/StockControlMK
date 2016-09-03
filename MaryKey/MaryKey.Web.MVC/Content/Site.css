@@ -31,12 +31,6 @@
 
 }
 
-.inputStyle{
-    margin-left: 15%;
-    padding-right: 10px;
-    width: 30%;
-}
-
 .botao{
     background-color:#f6aed3;
     color:black;
@@ -68,10 +62,6 @@
     color:#ccc;
 }
 
-.pos-absolute{
-    position:absolute;
-}
-
 .botao-Logout:active{
     text-decoration:none;
 }
@@ -94,4 +84,14 @@
 
 .hoverEfectTable:hover{
     background-color:#e8e4e4;
+}
+
+.inputStyle{
+    margin-left: 15%;
+    padding-right: 10px;
+    width: 30%;
+}
+
+.pos-absolute{
+    position:absolute;
 }
