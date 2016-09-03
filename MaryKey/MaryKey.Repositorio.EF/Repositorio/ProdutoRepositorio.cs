@@ -55,7 +55,7 @@ namespace MaryKey.Repositorio.EF.Repositorio
         {
             using (BaseDeDados bd = new BaseDeDados())
             {
-                var produtos = bd.Produto.Where(p => p.Nome!= null).ToList();
+                var produtos = bd.Produto.Where(p => p.Nome!= null).OrderBy(p => p.Nome.ToUpper()).ToList();
                 return produtos;
             }
         }
@@ -64,7 +64,7 @@ namespace MaryKey.Repositorio.EF.Repositorio
             Type _Hack = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
             using (this.CriarBaseDeDados())
             {
-                return bd.Produto.Where(p => p.Nome.Contains(nome)).ToList();
+                return bd.Produto.Where(p => p.Nome.Contains(nome)).OrderBy(p => p.Nome.ToUpper()).ToList();
             }
         }
 

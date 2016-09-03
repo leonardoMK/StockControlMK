@@ -31,6 +31,12 @@
 
 }
 
+.inputStyle{
+    margin-left: 15%;
+    padding-right: 10px;
+    width: 30%;
+}
+
 .botao{
     background-color:#f6aed3;
     color:black;
@@ -60,6 +66,10 @@
 .botao-Logout:hover{
     text-decoration:none;
     color:#ccc;
+}
+
+.pos-absolute{
+    position:absolute;
 }
 
 .botao-Logout:active{
