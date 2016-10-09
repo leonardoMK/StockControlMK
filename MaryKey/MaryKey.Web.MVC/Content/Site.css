@@ -19,17 +19,60 @@
     border: solid 1px #f6aed3;
     box-shadow: 0 0 5px 1px #a551b9;
 }
-
+.btnLogin{
+    margin-bottom:20px;
+}
 .login{
     border: 2px groove #ccc;
     border-radius: 5px;
-    width: 400px;
+    width: 45%;
     background-color: #f1f1f1;
-    height: 250px;
+    height: auto;
+    min-height:210px;
+    overflow:auto;
     padding-top: 2%;
-    margin-left:32.5%;
+    margin: 0 auto;
 
 }
+.table-inverse{
+    color: #eceeef;
+    background-color: #373a3c;
+}
+
+.table-inverse thead th{
+    border-color:#55595c;
+}
+
+.btnAdd{
+    color:#fff;
+    cursor:pointer;
+}
+.btnAdd:hover{
+    text-decoration:none;
+    color:#b0b0b0;
+}
+@media screen and (max-width: 770px) {
+    div .divSair{
+        float:none !important;
+        text-align:center !important;
+        height:50px;
+    }
+    .navbar-collapse.in{
+            overflow-y: inherit;
+    }
+}
+
+table tr th{
+        border-color: #55595c !important;
+        vertical-align:middle !important;
+        text-align: center !important;
+}
+table tr td{
+        border-color: #55595c !important;
+        vertical-align:middle !important;
+        text-align: center !important;
+}
+
 
 .botao{
     background-color:#f6aed3;
@@ -49,6 +92,7 @@
     border: solid 1px #dcdcdc;
     transition: box-shadow 0.3s, border 0.3s;
     border-radius:3px;
+    width:95%;
 }
 
 .input-Style:focus{
@@ -73,17 +117,23 @@
 }
 
 .texto-index{
-    color:crimson;
     text-align: center;
 }
+
+.alert-infoValores{
+    color: #424242;
+    background-color: rgba(88, 88, 88, 0.06);
+    border-color: rgba(62, 62, 62, 0.32);
+}
+
 .logoMaryKey{
-    width:50%;
-    height:40%;
+    width:40%;
+    height:30%;
     vertical-align:middle;
 }
 
 .hoverEfectTable:hover{
-    background-color:#e8e4e4;
+    background-color:#414141;
 }
 
 .inputStyle{

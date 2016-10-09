@@ -129,6 +129,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\Button_15-128.png" />
     <Content Include="Content\Images\favicon.ico" />
+    <Content Include="Content\Images\logo_mksc.png" />
+    <Content Include="Content\Images\mary-kay-logo.png" />
+    <Content Include="Content\Images\mk_logo.gif" />
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\Images\Mary-Kay-Logo-03.jpg" />
     <Content Include="Content\Site.css" />

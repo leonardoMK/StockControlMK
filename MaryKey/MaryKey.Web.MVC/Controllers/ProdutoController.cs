@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 
@@ -40,27 +42,47 @@ namespace MaryKey.Web.MVC.Controllers
             return View();
         }
 
-        public ActionResult RemoverUmItem(int id)
+        //public ActionResult RemoverUmItem(int id)
+        //{
+        //    var db = new ProdutoRepositorio();
+        //    var produto = db.buscarPorId(id);
+        //    if(produto.Quantidade <= 1)
+        //    {
+        //        TempData["Mensagem"] = "Produto excluido com sucesso!";
+        //        db.Excluir(id);
+        //    }
+        //    else
+        //    {
+        //        produto.Quantidade--;
+        //        db.RemoverUmItem(produto);
+        //        TempData["Mensagem"] = "Removido um item do produto";
+        //    }
+            
+            
+        //    return RedirectToAction("RelatorioProdutos", "Relatorio");
+        //}
+
+        public ActionResult RemoveOne(int id)
         {
             var db = new ProdutoRepositorio();
-            var produto = db.buscarPorId(id);
-            if(produto.Quantidade <= 1)
+            var item = db.buscarPorId(id);
+            if (item.Quantidade <= 1)
             {
                 TempData["Mensagem"] = "Produto excluido com sucesso!";
                 db.Excluir(id);
+                Response.StatusCode = (int)HttpStatusCode.OK;
             }
             else
             {
-                produto.Quantidade--;
-                db.RemoverUmItem(produto);
+                item.Quantidade--;
+                db.RemoverUmItem(item);
+                Response.StatusCode = (int)HttpStatusCode.OK;
                 TempData["Mensagem"] = "Removido um item do produto";
             }
-            
-            
-            return RedirectToAction("RelatorioProdutos", "Relatorio");
+            return Content(Convert.ToString(TempData["Mensagem"]));
         }
 
-        public ActionResult AdicionarUmItem(int id)
+        public ActionResult AddOne(int id)
         {
             var db = new ProdutoRepositorio();
             var produto = db.buscarPorId(id);
@@ -68,8 +90,20 @@ namespace MaryKey.Web.MVC.Controllers
             db.Atualizar(produto);
 
             TempData["Mensagem"] = "Adicionado um item ao produto";
-            return RedirectToAction("RelatorioProdutos", "Relatorio");
+            Response.StatusCode = (int)HttpStatusCode.OK;
+            return Content(Convert.ToString(TempData["Mensagem"]));
         }
+
+        //public ActionResult AdicionarUmItem(int id)
+        //{
+        //    var db = new ProdutoRepositorio();
+        //    var produto = db.buscarPorId(id);
+        //    produto.Quantidade++;
+        //    db.Atualizar(produto);
+
+        //    TempData["Mensagem"] = "Adicionado um item ao produto";
+        //    return RedirectToAction("RelatorioProdutos", "Relatorio");
+        //}
 
         public ActionResult ExcluirProduto(int id)
         {

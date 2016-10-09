@@ -2,53 +2,122 @@
 @{
     ViewBag.Title = "RelatorioProdutos";
 }
-@if(TempData["Mensagem"]!=null)
-{ 
-    <div class="alert-success alert-meuEfeito" style="width:40%;height:20%;">
-        <h3 class="text-success text-center" style="vertical-align:middle;">@TempData["Mensagem"]</h3>
+<div class="panel panel-default" style="margin-top: 5%;">
+    <div class="panel-heading">
+        <h2>Relatório de Produtos em Estoque</h2>
     </div>
-}
-<h2>Relatório de Produtos em Estoque</h2>
-<a class="btn botao pull-right" style="margin-bottom:10px;" href="~/Produto/ManterProduto">Adicionar Produto</a>
-<table class="table table-bordered White">
-<thead>
-        <tr style="background-color:#beb9b9;" class="linha white">
-            <th style="width: 15%">Produto</th>
-            <th style="width: 8%" class="text-center">Quantidade</th>
-            <th style="width: 6%">Valor de compra</th>
-            <th style="width: 6%">Valor de venda</th> 
-            <th style="width: 5%">Valor Total</th> 
-            <th style="width: 5%">Lucro total</th>
-            <th style="width: 4%" class="text-center">Edição</th>
-            <th style="width: 6%" class="text-center">Excluir</th>
-        </tr>
-    </thead>
-    @{  decimal LucroTotal = 0;
-        decimal TotalPago = 0;
-        decimal TotalVenda = 0;
+    <div class="panel-body">
+
+        <div class="alert-success alert" style="display:none;margin-top:20px;">
+            <h3 class="text-success text-center" id="mensagem" style="vertical-align:middle;margin:0;">@TempData["Mensagem"]</h3>
+        </div>
+        <a class="btn botao pull-right" style="margin-bottom:10px;" href="~/Produto/ManterProduto">Adicionar Produto</a>
+            <table class="table table-inverse">
+                <thead>
+                    <tr class="">
+                        <th>ID</th>
+                        <th>Produto</th>
+                        <th class="text-center">Quantidade</th>
+                        <th>Valor de compra</th>
+                        <th>Valor de venda</th>
+                        <th>Valor Total</th>
+                        <th>Lucro total</th>
+                        <th class="text-center">Edição</th>
+                        <th class="text-center">Excluir</th>
+                    </tr>
+                </thead>
+                @{  decimal LucroTotal = 0;
+            decimal TotalPago = 0;
+            decimal TotalVenda = 0;
+                }
+                @foreach (var p in Model)
+            {
+                    <tr class="hoverEfectTable" style="">
+                        <td style="padding: 0; padding-left: 5px;vertical-align: middle;">@p.Id</td>
+                        <td style="padding: 0; padding-left: 5px;vertical-align: middle;">@p.Nome</td>
+                        <td class="text-center">
+                            <a class="glyphicon glyphicon-plus addOne btnAdd" id="@p.Id"></a>
+                            <span id="@p.Id" class="text-center" style="margin-left:5%;font-size:15px;">@p.Quantidade</span>
+                            <a class="glyphicon glyphicon-minus btnAdd removeOne " style="margin-left:5%;" id="@p.Id"></a>
+                        </td>
+                        <td style="padding: 0; padding-left: 5px;vertical-align: middle;">R$ @String.Format("{0:0.00}", p.GetValorCompra())</td>
+                        <td style="padding: 0; padding-left: 5px;vertical-align: middle;">R$ @String.Format("{0:0.00}", p.ValorProduto)</td>
+                        <td style="padding: 0; padding-left: 5px;vertical-align: middle;">R$ @String.Format("{0:0.00}", p.ValorTotal)</td>
+                        <td style="padding: 0; padding-left: 5px;vertical-align: middle;">R$ @String.Format("{0:0.00}", p.Lucro)</td>
+                        <td class="text-center"><a class="btnAdd glyphicon glyphicon-edit" href="~/Produto/ManterProduto/@p.Id"></a></td>
+                        <td class="text-center"><a class="btnAdd glyphicon glyphicon-remove" href="~/Produto/ExcluirProduto/@p.Id"></a></td>
+                    </tr>
+                    {
+                        LucroTotal += @p.Lucro;
+                        TotalPago += @p.GetValorCompra() * p.Quantidade;
+                        TotalVenda += @p.ValorProduto * p.Quantidade;
+                    }
+                }
+            </table>
+        <div class="alert alert-infoValores">
+            <h4 style="margin:0;">O valor total pago pelos produtos listados é de: R$ @String.Format("{0:0.00}", TotalPago)</h4>
+        </div>
+        <div class="alert alert-infoValores">
+            <h4 style="margin:0;">O valor total de venda dos produtos é de: R$ @String.Format("{0:0.00}", TotalVenda)</h4>
+        </div>
+        <div class="alert alert-infoValores">
+            <h4 style="margin:0;">O Lucro total dos produtos em estoque é de: R$ @String.Format("{0:0.00}", LucroTotal)</h4>
+        </div>
+
+    </div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        console.log("teste");
+        $("a.removeOne").click(function () {
+            var id = $(this).attr('id');
+            var quantidade = $("td").find("span#" + id);
+            var excluir = true;
+
+            console.log(id);
+            if (parseInt(quantidade.text()) <= 1) {
+                excluir = confirm("O item selecionado possui apenas uma unidade, deseja realmente excluir o mesmo?");
+            }
+            if (excluir) {            
+                $.ajax({
+                    url: '/Produto/RemoveOne/' + id,
+                    success: function (response) {
+                        $(quantidade).text(parseInt(quantidade.text()) - 1);
+                        escreverMensagem(response);
+
+                        if (response.toLowerCase() == "produto excluido com sucesso!") {
+                            var linha = $("td").find("span#"+id).parents()[1];
+                            console.log(linha);
+                            $(linha).hide(500);
+                            setTimeout(function () {
+                                $(linha).remove();
+                            },1000);
+                        }
+                    }
+                })
+            }
+        });
+
+        $("a.addOne").click(function () {
+            var id = $(this).attr('id');
+            console.log(id);
+            $.ajax({
+                url: '/Produto/AddOne/' + id,
+                success: function (response) {
+                    var quantidade = $("td").find("span#" + id);
+                    $(quantidade).text(parseInt(quantidade.text()) + 1);
+                    escreverMensagem(response);
+                }
+            })
+        });
+        
+        function escreverMensagem(mensagem) {
+            $("#mensagem").text(mensagem);
+            $(".alert-success.alert").show(500);
+            setTimeout(function () {
+                $(".alert-success.alert").hide(1000);
+            }, 5000);
         }
-    @foreach (var p in Model)
-    {
-        <tr class="linha hoverEfectTable" style="color:#52414c;font-family:'Comic Sans MS';font-weight:bold;">
-            <td>@p.Nome</td>
-            <td><a class="btn botao pull-left list-inline" href="~/Produto/AdicionarUmItem/@p.Id">+1</a><span class="btn btn-default text-center" style="margin-left:13%;">@p.Quantidade</span><a class="btn botao pull-right list-inline" href="~/Produto/RemoverUmItem/@p.Id">-1</a></td>
-            <td>R$ @String.Format("{0:0.00}",p.GetValorCompra())</td>
-            <td>R$ @String.Format("{0:0.00}", p.ValorProduto)</td>
-            <td>R$ @String.Format("{0:0.00}", p.ValorTotal)</td>
-            <td>R$ @String.Format("{0:0.00}", p.Lucro)</td>
-            <td class="text-center"><a class="btn botao" href="~/Produto/ManterProduto/@p.Id">Editar</a></td>
-            <td class="text-center"><a class="btn botao" href="~/Produto/ExcluirProduto/@p.Id">Excluir</a></td>
-        </tr>
-        {   LucroTotal += @p.Lucro;
-            TotalPago += @p.GetValorCompra() * p.Quantidade;
-            TotalVenda += @p.ValorProduto * p.Quantidade;
-        }
-    }
-</table>
-
-    <h3>O valor total pago pelos produtos listados é de: R$ @String.Format("{0:0.00}", TotalPago)</h3>
-    <h3>O valor total de venda dos produtos é de: R$ @String.Format("{0:0.00}",TotalVenda)</h3>
-    <h3>O Lucro total dos produtos em estoque é de: R$ @String.Format("{0:0.00}", LucroTotal)</h3>
-
-
+    });
+</script>
 
