@@ -34,6 +34,9 @@
     margin: 0 auto;
 
 }
+.form-group{
+    width:60%;
+}
 .table-inverse{
     color: #eceeef;
     background-color: #373a3c;
@@ -59,6 +62,41 @@
     }
     .navbar-collapse.in{
             overflow-y: inherit;
+    }
+}
+@media screen and (max-width: 1000px) {
+    .inputStyle{
+        width:60%;
+    }
+    .form-group{
+        width:80%;
+    }
+}
+@media screen and (max-width: 594px){
+    div .panel{
+        min-width: 547px;
+    }
+}
+
+@media screen and (max-width: 670px) {
+    .table>thead>tr>th{
+        font-size:12px;
+
+    }
+    .table>tbody>tr>td{
+        font-size:10px;
+    }
+    h2{
+        font-size:20px;
+    }
+    h4{
+        font-size:16px;
+    }
+    .inputStyle{
+        width:60% !important;
+    }
+    .form-group{
+        width:95% !important;
     }
 }
 
@@ -94,7 +132,6 @@ table tr td{
     border-radius:3px;
     width:95%;
 }
-
 .input-Style:focus{
     outline: none;
     border: solid 1px #707070;
@@ -137,9 +174,9 @@ table tr td{
 }
 
 .inputStyle{
-    margin-left: 15%;
     padding-right: 10px;
-    width: 30%;
+    width: 70%;
+    float:right;
 }
 
 .pos-absolute{

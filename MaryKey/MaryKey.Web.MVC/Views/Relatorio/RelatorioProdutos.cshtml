@@ -7,9 +7,8 @@
         <h2>Relatório de Produtos em Estoque</h2>
     </div>
     <div class="panel-body">
-
         <div class="alert-success alert" style="display:none;margin-top:20px;">
-            <h3 class="text-success text-center" id="mensagem" style="vertical-align:middle;margin:0;">@TempData["Mensagem"]</h3>
+            <h3 class="text-success text-center" id="mensagem" style="vertical-align:middle;margin:0;"></h3>
         </div>
         <a class="btn botao pull-right" style="margin-bottom:10px;" href="~/Produto/ManterProduto">Adicionar Produto</a>
             <table class="table table-inverse">
@@ -18,8 +17,8 @@
                         <th>ID</th>
                         <th>Produto</th>
                         <th class="text-center">Quantidade</th>
-                        <th>Valor de compra</th>
-                        <th>Valor de venda</th>
+                        <th>Valor de compra (unidade)</th>
+                        <th>Valor de venda (unidade)</th>
                         <th>Valor Total</th>
                         <th>Lucro total</th>
                         <th class="text-center">Edição</th>
@@ -35,17 +34,17 @@
                     <tr class="hoverEfectTable" style="">
                         <td style="padding: 0; padding-left: 5px;vertical-align: middle;">@p.Id</td>
                         <td style="padding: 0; padding-left: 5px;vertical-align: middle;">@p.Nome</td>
-                        <td class="text-center">
+                        <td class="text-center" id="quantidade">
                             <a class="glyphicon glyphicon-plus addOne btnAdd" id="@p.Id"></a>
                             <span id="@p.Id" class="text-center" style="margin-left:5%;font-size:15px;">@p.Quantidade</span>
                             <a class="glyphicon glyphicon-minus btnAdd removeOne " style="margin-left:5%;" id="@p.Id"></a>
                         </td>
-                        <td style="padding: 0; padding-left: 5px;vertical-align: middle;">R$ @String.Format("{0:0.00}", p.GetValorCompra())</td>
-                        <td style="padding: 0; padding-left: 5px;vertical-align: middle;">R$ @String.Format("{0:0.00}", p.ValorProduto)</td>
-                        <td style="padding: 0; padding-left: 5px;vertical-align: middle;">R$ @String.Format("{0:0.00}", p.ValorTotal)</td>
-                        <td style="padding: 0; padding-left: 5px;vertical-align: middle;">R$ @String.Format("{0:0.00}", p.Lucro)</td>
+                        <td id="@p.Id-compra" style="padding: 0; padding-left: 5px;vertical-align: middle;">R$ @String.Format("{0:0.00}", p.GetValorCompra())</td>
+                        <td id="@p.Id-valorProduto" style="padding: 0; padding-left: 5px;vertical-align: middle;">R$ @String.Format("{0:0.00}", p.ValorProduto)</td>
+                        <td id="@p.Id-total" style="padding: 0; padding-left: 5px;vertical-align: middle;">R$ @String.Format("{0:0.00}", p.ValorTotal)</td>
+                        <td id="@p.Id-lucro" style="padding: 0; padding-left: 5px;vertical-align: middle;">R$ @String.Format("{0:0.00}", p.Lucro)</td>
                         <td class="text-center"><a class="btnAdd glyphicon glyphicon-edit" href="~/Produto/ManterProduto/@p.Id"></a></td>
-                        <td class="text-center"><a class="btnAdd glyphicon glyphicon-remove" href="~/Produto/ExcluirProduto/@p.Id"></a></td>
+                        <td class="text-center"><a class="btnAdd glyphicon glyphicon-remove btnRemove" href="~/Produto/ExcluirProduto/@p.Id" onclick="return confirmDelete(this);"></a></td>
                     </tr>
                     {
                         LucroTotal += @p.Lucro;
@@ -65,16 +64,15 @@
         </div>
 
     </div>
+</div>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script>
     $(document).ready(function () {
-        console.log("teste");
         $("a.removeOne").click(function () {
             var id = $(this).attr('id');
             var quantidade = $("td").find("span#" + id);
             var excluir = true;
 
-            console.log(id);
             if (parseInt(quantidade.text()) <= 1) {
                 excluir = confirm("O item selecionado possui apenas uma unidade, deseja realmente excluir o mesmo?");
             }
@@ -87,12 +85,12 @@
 
                         if (response.toLowerCase() == "produto excluido com sucesso!") {
                             var linha = $("td").find("span#"+id).parents()[1];
-                            console.log(linha);
                             $(linha).hide(500);
                             setTimeout(function () {
                                 $(linha).remove();
-                            },1000);
+                            },500);
                         }
+                        atualizarValores(id);
                     }
                 })
             }
@@ -100,24 +98,53 @@
 
         $("a.addOne").click(function () {
             var id = $(this).attr('id');
-            console.log(id);
             $.ajax({
                 url: '/Produto/AddOne/' + id,
                 success: function (response) {
                     var quantidade = $("td").find("span#" + id);
                     $(quantidade).text(parseInt(quantidade.text()) + 1);
                     escreverMensagem(response);
+                    atualizarValores(id);
                 }
             })
         });
         
         function escreverMensagem(mensagem) {
             $("#mensagem").text(mensagem);
-            $(".alert-success.alert").show(500);
-            setTimeout(function () {
-                $(".alert-success.alert").hide(1000);
-            }, 5000);
+            if ($(".alert-success.alert").css('display') == 'none') {
+                $(".alert-success.alert").show(500);
+                setTimeout(function () {
+                    $(".alert-success.alert").hide(500);
+                }, 5000);
+            }
         }
+        function atualizarValores(id) {
+            var valorCompra = parseFloat($("#" + id + "-compra").text().split('R$ ')[1].replace(',', '.'));
+            var valorProduto = parseFloat($("#" + id + "-valorProduto").text().split('R$ ')[1].replace(',', '.'));
+            var valorTotal = parseFloat($("#" + id + "-total").text().split('R$ ')[1].replace(',', '.'));
+            var lucro = parseFloat($("#" + id + "-lucro").text().split('R$ ')[1].replace(',', '.'));
+            var quantidade = parseInt(($("#quantidade").find('span#' + id).text()));
+            var novoTotal = valorProduto * quantidade;
+            var novoLucro = novoTotal - (valorCompra * quantidade);
+
+            var novoTotalString = novoTotal.toString();
+            var novoTotalString = novoTotalString.split('.').length == 1 ? novoTotalString.concat(',00') : novoTotalString.replace('.', ',');
+
+            var novoLucroString = novoLucro.toString();
+            var novoLucroString = novoLucroString.split('.').length == 1 ? novoLucroString.concat(',00') : novoLucroString.replace('.', ',');
+
+            $("#" + id + "-total").text('R$ ' + novoTotalString);
+            $("#" + id + "-lucro").text('R$ ' + novoLucroString);
+        }
+        
     });
+    function confirmDelete(elem) {
+        if (confirm("Deseja realmente excluir o item?")) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 </script>
 

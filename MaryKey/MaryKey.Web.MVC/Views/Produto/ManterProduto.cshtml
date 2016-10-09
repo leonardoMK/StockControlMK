@@ -24,37 +24,37 @@ else
 
     @Html.HiddenFor(m => m.Id)
     <div class="form-group">
-        @Html.LabelFor(m => m.Nome, new { @class = "control-label pull-left pos-absolute" })
-        <div class="col-sm-10">
+        @Html.LabelFor(m => m.Nome, new { @class = "control-label pull-left" })
+        <div>
             @Html.TextBoxFor(m => m.Nome, new { @class = "input-Style inputStyle" }) <br />
             @Html.ValidationMessageFor(m => m.Nome, null, new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.ValorProduto, new { @class = "control-label pull-left pos-absolute" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.ValorProduto, new { @class = "input-Style inputStyle" }) <br />
+        @Html.LabelFor(m => m.ValorProduto, new { @class = "control-label pull-left" })
+        <div>
+            @Html.TextBoxFor(m => m.ValorProduto, new { @class = "input-Style inputStyle", id = "money" }) <br />
             @Html.ValidationMessageFor(m => m.ValorProduto, null, new { @class = "text-danger" })
         </div>
     </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Quantidade, new { @class = "control-label pull-left pos-absolute" })
-            <div class="col-sm-10">
+            @Html.LabelFor(m => m.Quantidade, new { @class = "control-label pull-left" })
+            <div>
                 @Html.TextBoxFor(m => m.Quantidade, new { @class = "input-Style inputStyle", @type = "number" })<br />
                 @Html.ValidationMessageFor(m => m.Quantidade, null, new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.PercentualDesconto, new { @class = "control-label pull-left pos-absolute" })
-            <div class="col-sm-10">
+            @Html.LabelFor(m => m.PercentualDesconto, new { @class = "control-label pull-left" })
+            <div >
                 @Html.TextBoxFor(m => m.PercentualDesconto, new { @class = "input-Style inputStyle" }) <br />
                 @Html.ValidationMessageFor(m => m.PercentualDesconto, null, new { @class = "text-danger" })
             </div>
         </div>
 
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div >
             <button type="submit" class="btn btn-primary">Salvar</button>
         </div>
     </div>
@@ -62,4 +62,12 @@ else
 @section Scripts {
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 <script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/maskJquery.js"></script>
+<script language="javascript">
+    $(document).ready(function(){
+        $('#money').mask('000.000.000.000.000,00', { reverse: true });
+    });
+
+</script>
 }
+
