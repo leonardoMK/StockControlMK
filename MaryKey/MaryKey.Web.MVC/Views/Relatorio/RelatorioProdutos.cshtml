@@ -151,12 +151,15 @@
             var itens = $("tr.hoverEfectTable");
             if (value == ""){
                 itens.show();
+                $("#registros").text(itens.length + " Produtos Encontrados");
             }
             else {
                 var matches;
-                matches = itens.filter(":contains('" + value + "')");
-                console.log(itens);
-                console.log(matches);
+                matches = itens.filter(function (i, v) {
+                    return $(v).text().toUpperCase().indexOf(value.toUpperCase()) >= 0;
+
+                });
+                //matches = itens.filter(":contains('" + value.toUpperCase() + "')");
                 itens.hide();
                 matches.show();
 
