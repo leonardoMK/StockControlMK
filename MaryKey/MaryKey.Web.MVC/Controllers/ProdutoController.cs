@@ -66,11 +66,11 @@ namespace MaryKey.Web.MVC.Controllers
         {
             var db = new ProdutoRepositorio();
             var item = db.buscarPorId(id);
-            if (item.Quantidade <= 1)
+            if (item.Quantidade < 1)
             {
-                TempData["Mensagem"] = "Produto excluido com sucesso!";
-                db.Excluir(id);
-                Response.StatusCode = (int)HttpStatusCode.OK;
+                TempData["Mensagem"] = "Operação não aceita, produto possui menos que 1 item no estoque";
+                Response.StatusCode = (int)HttpStatusCode.NotAcceptable;
+                return Content(Convert.ToString(TempData["Mensagem"]));
             }
             else
             {

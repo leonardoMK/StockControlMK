@@ -10,7 +10,9 @@
         <div class="alert-success alert" style="display:none;margin-top:20px;">
             <h3 class="text-success text-center" id="mensagem" style="vertical-align:middle;margin:0;"></h3>
         </div>
-        <a class="btn botao pull-right" style="margin-bottom:10px;" href="~/Produto/ManterProduto">Adicionar Produto</a>
+        <input type="text" id="search" class="input-Style inputStyle pull-left" style="width:50%;" placeholder="Procurar Um Produto" />
+        <a class="btn btn-primary pull-right" style="margin-bottom:10px;" href="~/Produto/ManterProduto">Adicionar Produto</a>
+        <p id="registros">@Model.Count Produtos encontrados</p>
             <table class="table table-inverse">
                 <thead>
                     <tr class="">
@@ -73,8 +75,9 @@
             var quantidade = $("td").find("span#" + id);
             var excluir = true;
 
-            if (parseInt(quantidade.text()) <= 1) {
-                excluir = confirm("O item selecionado possui apenas uma unidade, deseja realmente excluir o mesmo?");
+            if (parseInt(quantidade.text()) <= 0) {
+                //excluir = confirm("O item selecionado possui apenas uma unidade, deseja realmente excluir o mesmo?");
+                excluir = false;
             }
             if (excluir) {            
                 $.ajax({
@@ -91,6 +94,10 @@
                             },500);
                         }
                         atualizarValores(id);
+                    },
+                    error: function (response) {
+                        escreverMensagem(response);
+                        console.log(response)
                     }
                 })
             }
@@ -135,6 +142,26 @@
 
             $("#" + id + "-total").text('R$ ' + novoTotalString);
             $("#" + id + "-lucro").text('R$ ' + novoLucroString);
+        }
+        $("#search").keyup(function () {
+            searchFast(this.value);
+        });
+        var searchFast = function(value){
+            //console.log(value)
+            var itens = $("tr.hoverEfectTable");
+            if (value == ""){
+                itens.show();
+            }
+            else {
+                var matches;
+                matches = itens.filter(":contains('" + value + "')");
+                console.log(itens);
+                console.log(matches);
+                itens.hide();
+                matches.show();
+
+                $("#registros").text(matches.length+" Produtos Encontrados");
+            }
         }
         
     });
